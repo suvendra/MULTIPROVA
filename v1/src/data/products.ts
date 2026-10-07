@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 'cibil', name: 'CIBIL & Credit Guidance', icon: 'cibil', category: 'Credit confidence',
+    id: 'cibil', name: 'Credit Score', icon: 'cibil', category: 'Credit confidence',
     headline: 'Your next chapter starts with', highlight: 'credit clarity.',
     intro: 'Make sense of your credit report before your next big decision. Get help understanding your accounts, spotting discrepancies and planning your next steps.',
     cta: 'Discuss my credit report', visual: 'Know where you stand', visualSub: 'Understand. Review. Move forward.', tags: ['Report review', 'Dispute guidance', 'Clear next steps'],
@@ -26,7 +26,7 @@ export const products = [
     source: 'https://irdai.gov.in/health-dept', sourceLabel: 'IRDAI guidance on policy information',
   },
   {
-    id: 'rsa', name: 'Roadside Assistance', icon: 'rsa', category: 'Confidence on the road',
+    id: 'rsa', name: 'RSA', icon: 'rsa', category: 'Confidence on the road',
     headline: 'A bump in the road.', highlight: 'Not in your plans.',
     intro: 'Explore roadside assistance for those moments when your vehicle lets you down. Understand your support options before your next journey.',
     cta: 'Find roadside support', visual: 'Keep your journey going', visualSub: 'A little preparation. More peace of mind.', tags: ['Breakdown support', 'Towing options', 'On-road help'],
@@ -38,7 +38,7 @@ export const products = [
     faqs: [ ['Is roadside assistance the same as motor insurance?', 'No. Roadside assistance focuses on breakdown support. Motor insurance responds to insured events under its policy terms. Check whether your existing policy includes assistance.'], ['Is towing always included?', 'It depends on the plan. Ask about distance allowances, destination restrictions and any additional charges before enrolling.'], ['What should I do if my vehicle breaks down?', 'Move to a safe location if possible and contact the assistance number on your plan. Share your location, vehicle details and the nature of the problem. For immediate danger, contact emergency services.'] ],
   },
   {
-    id: 'pa', name: 'Personal Accident Insurance', icon: 'pa-policy', category: 'Protection for the unexpected',
+    id: 'pa', name: 'Personal Accident', icon: 'pa-policy', category: 'Protection for the unexpected',
     headline: 'You show up for them.', highlight: 'Plan for yourself.',
     intro: 'Explore personal accident cover designed around the financial impact of an accident, with a clear understanding of the benefits and conditions.',
     cta: 'Discuss accident cover', visual: 'Support beyond the moment', visualSub: 'For you and the people who count on you.', tags: ['Accident protection', 'Disability benefits', 'Family security'],
@@ -50,7 +50,7 @@ export const products = [
     faqs: [ ['Does it cover every injury?', 'No. A benefit is payable only when the event and resulting injury meet the policy definitions and conditions. Review exclusions and the benefit schedule carefully.'], ['Does it pay hospital bills?', 'Some plans may offer medical expense benefits, but this is not universal. Check your chosen policy instead of assuming hospital costs are included.'], ['Can my occupation affect eligibility?', 'Yes. Insurers may consider occupation and activities when assessing eligibility, pricing and conditions. Provide complete and accurate details when applying.'] ],
   },
   {
-    id: 'claims', name: 'Claim Services', icon: 'claim-services', category: 'Support when it matters',
+    id: 'claims', name: 'Claim Servicing', icon: 'claim-services', category: 'Support when it matters',
     headline: 'Less uncertainty.', highlight: 'More support.',
     intro: 'When it is time to make a claim, you should know what comes next. Get help organising documents, understanding the process and following up with your insurer.',
     cta: 'Discuss my claim', visual: 'One step at a time', visualSub: 'Organise. Submit. Follow up.', tags: ['Document guidance', 'Filing support', 'Follow-up assistance'],
@@ -63,4 +63,4 @@ export const products = [
     source: 'https://irdai.gov.in/faqs-on-health-insurance-regulations', sourceLabel: 'IRDAI health insurance claims guidance',
   },
 ];
-export const productHref = (id: string) => products.some((p) => p.id === id) ? `/products/${id}/` : `/services#${id}`;
+export const productHref = (id: string) => products.some((p) => p.id === id) ? `/products/${id}/` : `/services/#${id}`;

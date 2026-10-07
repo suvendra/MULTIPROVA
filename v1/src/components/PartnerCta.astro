@@ -1,0 +1,33 @@
+---
+import { SITE } from '../config';
+import Icon from './Icon.astro';
+---
+<section id="partners" class="partner-section bg-white" aria-labelledby="partner-heading">
+  <div class="container-x">
+    <div class="partner-group">
+      <div class="partner-intro">
+        <img class="partner-certificate" src="/partner-certificate.svg" width="480" height="480" alt="" aria-hidden="true" loading="lazy" />
+        <div class="partner-copy">
+          <h2 id="partner-heading" class="text-xl font-bold text-sama-navy sm:text-2xl">Partner with MULTIPROVA</h2>
+          <p class="mt-2 text-sm leading-relaxed text-sama-navy/70">Bring our services to your customers.</p>
+        </div>
+      </div>
+      <a href={SITE.links.partner} class="btn btn-navy partner-action" target="_blank" rel="noopener noreferrer">Become a Partner <Icon name="arrow-right" class="h-4 w-4" /></a>
+    </div>
+  </div>
+</section>
+<style>
+  .partner-section { padding-block: 28px; }
+  .partner-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; }
+  .partner-intro { display: flex; justify-content: flex-end; align-items: center; gap: 28px; min-width: 0; }
+  .partner-copy { min-width: 0; text-align: right; }
+  .partner-action { justify-self: center; }
+  /* The document occupies the upper 80% of the SVG; align its visual centre
+     with the copy, allowing the ribbon to extend below that shared centre. */
+  .partner-certificate { display: block; flex-shrink: 0; width: 112px; height: 112px; object-fit: contain; transform: translateY(10%); }
+  @media (max-width: 767px) {
+    .partner-group { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .partner-intro { gap: 20px; }
+    .partner-certificate { width: 80px; height: 80px; }
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import { SITE } from '../config';
+---
+<section id="download-app" class="app-section bg-[#f8fafc]" aria-labelledby="download-heading">
+  <div class="container-x app-layout">
+    <div class="app-copy">
+      <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-gold-ink">MULTIPROVA ON MOBILE</p>
+      <h2 id="download-heading" class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Get the MULTIPROVA app</h2>
+      <p class="mt-4 max-w-lg text-sm leading-relaxed text-sama-navy/70 sm:text-base">Insurance and everyday services, within reach.</p>
+      <div class="store-actions mt-6">
+        <a class="store-badge" href={SITE.links.appStore} target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 1.43c.07 1.03-.34 2.05-.99 2.8-.68.82-1.76 1.45-2.81 1.37-.13-1.02.39-2.1 1.01-2.76.69-.79 1.87-1.34 2.79-1.41ZM20.4 17.6c-.52 1.2-.77 1.74-1.44 2.8-.94 1.47-2.27 3.3-3.92 3.31-1.46.02-1.84-.96-3.81-.95-1.97.01-2.39.97-3.85.95-1.65-.02-2.91-1.67-3.85-3.14-2.64-4.12-2.92-8.96-1.29-11.54C3.4 7.2 5.18 6.12 6.86 6.12c1.71 0 2.79.97 4.2.97 1.37 0 2.2-.97 4.18-.97 1.5 0 3.1.82 4.23 2.23-3.72 2.04-3.11 7.36.93 9.25Z" /></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store-badge" href={SITE.links.googlePlay} target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 26" aria-hidden="true"><path fill="#5bc8f5" d="M1 1v24l12-12Z"/><path fill="#77d389" d="m1 1 15 8-3 4Z"/><path fill="#fbd35e" d="m16 9 7 4-7 4-3-4Z"/><path fill="#f26b79" d="m1 25 15-8-3-4Z"/></svg>
+          <span><small>GET IT ON</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+    </div>
+    <div class="app-illustration" aria-hidden="true">
+      <div class="brand-phone">
+        <div class="phone-screen">
+          <div class="phone-camera"></div>
+          <img class="phone-logo" src={SITE.logo} width="784" height="300" alt="" loading="lazy" />
+          <img class="phone-image" src="/sama-robot2.png" width="1325" height="1187" alt="" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .app-section { overflow: hidden; }
+  .app-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; min-height: 340px; }
+  .app-copy { min-width: 0; padding-block: 48px; text-align: right; }
+  .app-copy > p { margin-left: auto; }
+  .app-copy h2 { text-wrap: balance; }
+  .app-illustration { position: relative; align-self: stretch; justify-self: center; width: 80%; min-width: 0; margin-top: 32px; }
+  .brand-phone { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(100%, 290px); aspect-ratio: 1 / 2; padding: 7px; border: 5px solid var(--color-sama-navy); border-radius: 42px; background: var(--color-sama-navy-100); box-shadow: 0 12px 28px rgb(8 56 136 / .08); }
+  .phone-screen { position: relative; height: 100%; overflow: hidden; border-radius: 30px; background: white; padding-top: 55px; }
+  .phone-camera { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 72px; height: 18px; border-radius: 12px; background: var(--color-sama-navy); }
+  .phone-logo { display: block; width: 72%; height: auto; margin-inline: auto; }
+  .phone-image { display: block; width: 100%; height: auto; margin-top: 18px; }
+  .store-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
+  .store-badge { display: inline-flex; align-items: center; gap: 10px; min-width: 168px; min-height: 54px; padding: 8px 14px; border: 1px solid #454545; border-radius: 8px; background: #111; color: white; transition: background .2s; }
+  .store-badge:hover { background: #292929; }
+  .store-badge:focus-visible { outline: 3px solid var(--color-brand-gold-ink); outline-offset: 4px; }
+  .store-badge svg { width: 25px; height: 28px; flex-shrink: 0; }
+  .store-badge span { display: flex; flex-direction: column; text-align: left; }
+  .store-badge small { font-size: 9px; line-height: 1.3; letter-spacing: .2px; }
+  .store-badge strong { font-size: 19px; line-height: 1.3; font-weight: 600; letter-spacing: -.3px; }
+  @media (max-width: 767px) {
+    .app-layout { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; }
+    .app-copy { padding-block: 32px 28px; }
+    .app-illustration { width: 100%; height: 260px; margin-top: 0; }
+    .brand-phone { width: 250px; }
+    .store-actions { gap: 10px; }
+    .store-badge { min-width: 0; flex: 0 1 auto; padding-inline: 12px; }
+    .store-badge strong { font-size: 18px; }
+  }
+  @media (max-width: 359px) {
+    .store-actions { flex-wrap: nowrap; }
+    .store-badge { flex: 1; gap: 7px; padding-inline: 8px; }
+    .store-badge svg { width: 20px; height: 24px; }
+    .store-badge strong { font-size: 16px; }
+    .store-badge small { font-size: 8px; }
+  }
+</style>

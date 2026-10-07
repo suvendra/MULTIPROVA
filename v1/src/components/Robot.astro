@@ -1,10 +1,10 @@
 ---
 // MULTIPROVA AI mascot: friendly white robot with a navy face screen and a blue
 // "AI" chest badge, waving hello.
-interface Props { compact?: boolean; }
-const { compact = false } = Astro.props;
+interface Props { compact?: boolean; hero?: boolean; }
+const { compact = false, hero = false } = Astro.props;
 ---
-<div class:list={["sama-mascot relative mx-auto w-fit", { "sama-mascot--compact": compact }]}>
+<div class:list={["sama-mascot relative mx-auto w-fit", { "sama-mascot--compact": compact, "sama-mascot--hero": hero }]}>
   <!-- Speech bubble -->
   {!compact && <div class="relative z-10 mb-4 ml-auto w-64 animate-floaty rounded-2xl rounded-br-sm bg-white p-4 text-left shadow-xl shadow-sama-navy/10 ring-1 ring-sama-navy/5 sm:w-72">
     <span class="absolute -right-2 top-3 flex h-4 w-4" aria-hidden="true">
@@ -28,5 +28,12 @@ const { compact = false } = Astro.props;
   .robot-image { display: block; width: 390px; height: 350px; max-width: 100%; object-fit: contain; }
   .sama-mascot:not(.sama-mascot--compact) { mix-blend-mode: multiply; }
   .sama-mascot--compact .robot-image { width: 145px; height: 145px; border-radius: 50%; background: white; object-fit: contain; }
-  @media (max-width: 639px) { .robot-image { width: 325px; height: 290px; } }
+  .sama-mascot--hero .robot-image { width: 280px; height: 250px; }
+  .sama-mascot--hero > div:first-child:not(.animate-floaty-slow) { width: 260px; padding: 10px 12px; margin-bottom: 10px; }
+  .sama-mascot--hero p { font-size: 11px; }
+  @media (max-width: 767px) {
+    .sama-mascot--hero > div:first-child:not(.animate-floaty-slow) { display: none; }
+    .sama-mascot--hero .robot-image { width: 145px; height: 130px; }
+  }
+  @media (max-width: 639px) { .sama-mascot:not(.sama-mascot--hero):not(.sama-mascot--compact) .robot-image { width: 325px; height: 290px; } }
 </style>

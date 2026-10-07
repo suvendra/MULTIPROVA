@@ -25,11 +25,7 @@ export const faqs: Faq[] = [
     a: 'Yes! From application, document verification, comparison, to issuance and post-purchase claim tracking, the entire process is 100% digital and paperless.',
   },
   {
-    q: 'Do you offer loans for all kinds of needs?',
-    a: 'We cover home and mortgage loans, education, personal, business and gold loans, and can match you with lenders offering the best rates for your profile.',
-  },
-  {
-    q: 'How do I get started with an investment plan?',
-    a: 'Book a free consultation. We understand your goals and risk appetite, then recommend mutual fund, fixed deposit or pension plans tailored to you.',
+    q: 'Which loan services are available?',
+    a: 'Our current services include Gold Loan and Small Loan guidance. Contact our team to discuss your requirements and the available options.',
   },
 ];

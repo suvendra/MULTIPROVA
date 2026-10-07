@@ -4,22 +4,22 @@ import Icon from '../components/Icon.astro';
 import ArtIcon from '../components/ArtIcon.astro';
 import { categories } from '../data/services';
 import { products, productHref } from '../data/products';
-
-const total = categories.reduce((n, c) => n + c.items.length, 0);
+import { SITE } from '../config';
+const enquiryHref = (name: string) => `mailto:${SITE.contact.email}?subject=${encodeURIComponent(`Enquiry: ${name}`)}`;
 ---
 <BaseLayout
   title="All Services"
-  description={`Explore all ${total} MULTIPROVA services — insurance, loans, investments, vehicle services, tax & legal and dedicated support, all under one roof.`}
+  description="Explore MULTIPROVA insurance, roadside assistance, loan guidance, claim servicing, credit scores, litigation and personal accident cover."
 >
   <!-- Page hero -->
   <section class="bg-gradient-to-b from-white via-[#f2f6fd] to-[#e7effb]">
     <div class="container-x py-14 text-center sm:py-16">
       <p class="eyebrow">One trusted partner</p>
       <h1 class="mt-2 font-display text-4xl font-extrabold tracking-tight text-sama-navy sm:text-5xl">
-        All {total} services,<br class="sm:hidden" /> under one roof
+        Insurance and services,<br class="sm:hidden" /> under one roof
       </h1>
       <p class="mx-auto mt-4 max-w-xl text-sama-navy/70">
-        Insurance, loans, investments, vehicle services, tax &amp; legal and support — explore everything MULTIPROVA offers.
+        Explore insurance, roadside assistance, borrowing guidance, claim servicing, credit scores, litigation and personal accident cover.
       </p>
     </div>
   </section>
@@ -28,7 +28,7 @@ const total = categories.reduce((n, c) => n + c.items.length, 0);
   <section class="section bg-sama-slate">
     <div class="container-x space-y-14">
       {categories.map((c) => (
-        <div id={c.id} class="scroll-mt-28">
+        <div id={c.id}>
           <div class="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 class="font-display text-2xl font-bold text-sama-navy sm:text-3xl">{c.label}</h2>
@@ -41,7 +41,7 @@ const total = categories.reduce((n, c) => n + c.items.length, 0);
 
           <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {c.items.map((s) => (
-              <article id={s.id} class="scroll-mt-28 rounded-2xl bg-white p-6 ring-1 ring-sama-navy/5 transition hover:shadow-xl hover:shadow-sama-navy/5">
+              <article id={s.id === c.id ? `${s.id}-overview` : s.id} class="rounded-2xl bg-white p-6 ring-1 ring-sama-navy/5 transition hover:shadow-xl hover:shadow-sama-navy/5">
                 <div class="flex items-center gap-4">
                   <ArtIcon name={s.icon} class="h-14 w-14" />
                   <div>
@@ -57,7 +57,7 @@ const total = categories.reduce((n, c) => n + c.items.length, 0);
                     </li>
                   ))}
                 </ul>
-                {products.some(p => p.id === s.id) && <a href={productHref(s.id)} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold-ink">Explore service <Icon name="arrow-right" class="h-4 w-4" /></a>}
+                <a href={products.some(product => product.id === s.id) ? productHref(s.id) : enquiryHref(s.name)} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold-ink">{products.some(product => product.id === s.id) ? 'Explore service' : 'Enquire about this service'} <Icon name="arrow-right" class="h-4 w-4" /></a>
               </article>
             ))}
           </div>

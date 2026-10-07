@@ -10,7 +10,7 @@ export const SITE = {
   themeColor: '#083888',
   url: 'https://www.samainsurance.co.in',
   description:
-    'MULTIPROVA by SAMA Insurance — your trusted one-stop partner for insurance, loans, investments and financial services. Protecting today, securing tomorrow.',
+    'MULTIPROVA by SAMA Insurance — your trusted one-stop partner for insurance and everyday financial services. Protecting today, securing tomorrow.',
   contact: {
     phone: '1800-123-7262',
     email: 'care@samainsurance.in',
@@ -22,6 +22,12 @@ export const SITE = {
   legal: {
     irdai: 'IRDAI Lic. No. 123',
     cin: 'CIN: U74999KA2015PTC086123',
+  },
+  // Temporary destinations until the client supplies the app and partner URLs.
+  links: {
+    appStore: 'https://apps.apple.com/',
+    googlePlay: 'https://play.google.com/store/apps',
+    partner: 'https://example.com/',
   },
   social: {
     facebook: 'https://www.facebook.com/',

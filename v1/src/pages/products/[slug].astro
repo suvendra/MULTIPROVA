@@ -2,7 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArtIcon from '../../components/ArtIcon.astro';
 import Icon from '../../components/Icon.astro';
-import { products } from '../../data/products';
+import { products, productHref } from '../../data/products';
+import { everydayServices } from '../../data/services';
 import { SITE } from '../../config';
 export function getStaticPaths() {
   return products.map(product => ({ params: { slug: product.id }, props: { product } }));
@@ -40,7 +41,7 @@ const enquiry = `mailto:${SITE.contact.email}?subject=${encodeURIComponent(`Enqu
     <section class="process-section"><div class="container-x"><p class="eyebrow">From questions to next steps</p><h2>Let’s make it simple.</h2><div class="process-grid">{[['Tell us what you need', 'Start with your situation, your questions and what you want to achieve.'], ['Understand your options', 'Talk through the details, requirements and things to consider.'], ['Decide your next step', 'Move forward when you understand the process and feel ready.']].map(([title, text], i) => <div><span>0{i + 1}</span><h3>{title}</h3><p>{text}</p></div>)}</div></div></section>
     <section id="faqs" class="section container-x faq-grid"><div><p class="eyebrow">Good questions</p><h2>A little more clarity.</h2><p class="body-copy">Answers to the things you may be wondering.</p></div><div>{p.faqs.map(([question, answer]) => <details><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div></section>
     <section id="enquire" class="container-x"><div class="enquiry-panel"><div><p class="eyebrow">Your next step</p><h2>Let’s talk about<br />{p.name}.</h2><p>Bring your questions. We’ll help you find a way forward.</p></div><div class="enquiry-actions"><a class="btn btn-white" href={enquiry}>Email an enquiry <Icon name="arrow-right" class="h-4 w-4" /></a><span>Opens your email app with the product selected.</span><a class="contact-link" href={`tel:${SITE.contact.phone}`}>Or call {SITE.contact.phone}</a></div></div><p class="product-note">{p.note} {p.source && <a href={p.source} target="_blank" rel="noopener noreferrer">{p.sourceLabel} ↗</a>}</p></section>
-    <section class="container-x related-section"><div class="related-heading"><h2>Explore a little further.</h2><a href="/services/" class="text-link">All services ↗</a></div><div class="related-grid">{products.filter(other => other.id !== p.id).map(other => <a href={`/products/${other.id}/`}><ArtIcon name={other.icon} class="h-10 w-10" /><span>{other.name}</span><span>↗</span></a>)}</div></section>
+    <section class="container-x related-section"><div class="related-heading"><h2>Explore a little further.</h2><a href="/services/" class="text-link">All services ↗</a></div><div class="related-grid">{everydayServices.filter(other => other.id !== p.id).map(other => <a href={productHref(other.id)}><ArtIcon name={other.icon} class="h-10 w-10" /><span>{other.name}</span><span>↗</span></a>)}</div></section>
   </div>
 </BaseLayout>
 <style>

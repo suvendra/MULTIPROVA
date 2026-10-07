@@ -1,109 +1,47 @@
 ---
 import Icon from './Icon.astro';
 import ArtIcon from './ArtIcon.astro';
-import { categories } from '../data/services';
+import { everydayServices } from '../data/services';
 import { productHref } from '../data/products';
-const tab = (id: string) => `srv-tab-${id}`;
-const panel = (id: string) => `srv-panel-${id}`;
-const total = categories.reduce((n, c) => n + c.items.length, 0);
 ---
-<section class="section bg-white" id="services">
+<section class="services-section bg-white" id="services" aria-labelledby="services-heading">
   <div class="container-x">
-    <div class="relative flex flex-col items-center justify-center text-center">
-      <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">EVERYTHING YOU NEED IN ONE PLACE</p>
-      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Explore our services</h2>
-      <a href="/services/" class="absolute right-0 top-1/2 hidden -translate-y-1/2 rounded-full border border-sama-navy/25 bg-white px-5 py-2 text-xs font-semibold text-sama-navy transition hover:border-sama-navy hover:bg-slate-50 lg:inline-flex">
-        View all {total} services
-      </a>
+    <div class="services-heading-row">
+      <div class="services-heading-copy text-center">
+        <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">EVERYTHING YOU NEED IN ONE PLACE</p>
+        <h2 id="services-heading" class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Explore our services</h2>
+      </div>
+      <a href="/services/#everyday-services" class="services-all-link hidden items-center gap-2 rounded-full border border-sama-navy/25 px-5 py-2 text-xs font-semibold text-sama-navy transition hover:bg-slate-50 lg:inline-flex">View all services <Icon name="arrow-right" class="h-4 w-4" /></a>
     </div>
-
-    <div class="srv-wrap mt-8 sm:mt-10">
-      <!-- radio state inputs -->
-      {categories.map((c, i) => (
-        <input type="radio" name="srv" id={tab(c.id)} class="hidden" checked={i === 0} />
+    <div class="service-grid mt-6">
+      {everydayServices.map(service => (
+        <a href={productHref(service.id)} class="service-card group rounded-2xl border border-slate-100 bg-white text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md">
+          <ArtIcon name={service.icon} class="h-12 w-12" />
+          <span class="service-name text-sm font-bold text-sama-navy">{service.name}</span>
+        </a>
       ))}
-
-      <!-- Tab pills -->
-      <div class="flex justify-start gap-2.5 overflow-x-auto pb-2 no-scrollbar lg:justify-center">
-        {categories.map((c, i) => (
-          <label for={tab(c.id)} role="tab" aria-selected={i === 0}
-            class="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold text-sama-navy shadow-sm transition hover:bg-slate-50">
-            <ArtIcon name={c.items[0].icon} class="h-5 w-5" />
-            {c.label}
-          </label>
-        ))}
-      </div>
-
-      <!-- Panels -->
-      <div class="relative mt-8">
-        {categories.map((c) => (
-          <div id={panel(c.id)} class="srv-panel">
-            <div class="grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-              {c.items.map((s) => (
-                <a href={productHref(s.id)} class="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-slate-100 bg-white p-5 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md">
-                  <ArtIcon name={s.icon} class="h-12 w-12 sm:h-14 sm:w-14" />
-                  <span class="text-xs sm:text-sm font-bold leading-tight text-sama-navy">{s.name}</span>
-                </a>
-              ))}
-            </div>
-            <div class="mt-8 text-center">
-              <a href={`/services#${c.id}`} class="inline-flex items-center gap-1.5 text-sm font-semibold text-sama-navy transition hover:text-brand-gold-ink">
-                Explore all {c.label.toLowerCase()} services <Icon name="arrow-right" class="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
-
-    <div class="mt-6 text-center lg:hidden">
-      <a href="/services/" class="inline-flex items-center rounded-full border border-sama-navy/20 bg-white px-5 py-2.5 text-xs font-semibold text-sama-navy shadow-sm">View all {total} services</a>
-    </div>
+    <div class="mt-6 text-center lg:hidden"><a href="/services/#everyday-services" class="inline-flex items-center gap-2 text-sm font-semibold text-sama-navy">View all services <Icon name="arrow-right" class="h-4 w-4" /></a></div>
   </div>
 </section>
-
-<style is:global>
-  .srv-wrap:has(#srv-tab-insurance:checked) .srv-panel:not(#srv-panel-insurance),
-  .srv-wrap:has(#srv-tab-loans:checked) .srv-panel:not(#srv-panel-loans),
-  .srv-wrap:has(#srv-tab-investments:checked) .srv-panel:not(#srv-panel-investments),
-  .srv-wrap:has(#srv-tab-vehicle:checked) .srv-panel:not(#srv-panel-vehicle),
-  .srv-wrap:has(#srv-tab-tax-legal:checked) .srv-panel:not(#srv-panel-tax-legal),
-  .srv-wrap:has(#srv-tab-support:checked) .srv-panel:not(#srv-panel-support) {
-    display: none;
+<style>
+  .services-section { padding: 24px 0 56px; }
+  .service-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .service-card { grid-column: span 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 136px; padding: 16px 12px; }
+  .service-card:last-child { grid-column: 2 / span 2; }
+  .service-name { display: flex; align-items: center; justify-content: center; min-height: 36px; line-height: 18px; }
+  a:focus-visible { outline: 3px solid var(--color-brand-gold-ink); outline-offset: 4px; }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .service-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 16px; }
+    .service-card:nth-child(5) { grid-column: 2 / span 2; }
+    .service-card:last-child { grid-column: span 2; }
   }
-
-  .srv-wrap label {
-    border-color: rgb(22 33 92 / 0.1);
-    background: #fff;
-    color: var(--color-sama-navy);
+  @media (min-width: 1024px) {
+    .services-heading-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+    .services-heading-copy { grid-column: 2; }
+    .services-all-link { grid-column: 3; justify-self: end; }
+    .service-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px; }
+    .service-card, .service-card:last-child { grid-column: auto; }
   }
-
-  .srv-wrap:has(#srv-tab-insurance:checked) label[for='srv-tab-insurance'],
-  .srv-wrap:has(#srv-tab-loans:checked) label[for='srv-tab-loans'],
-  .srv-wrap:has(#srv-tab-investments:checked) label[for='srv-tab-investments'],
-  .srv-wrap:has(#srv-tab-vehicle:checked) label[for='srv-tab-vehicle'],
-  .srv-wrap:has(#srv-tab-tax-legal:checked) label[for='srv-tab-tax-legal'],
-  .srv-wrap:has(#srv-tab-support:checked) label[for='srv-tab-support'] {
-    border-color: var(--color-brand-gold-ink);
-    background: var(--color-sama-navy);
-    color: #fff;
-  }
-
-  .srv-wrap:has(#srv-tab-insurance:checked) label[for='srv-tab-insurance'] .text-sama-navy\/50,
-  .srv-wrap:has(#srv-tab-loans:checked) label[for='srv-tab-loans'] .text-sama-navy\/50,
-  .srv-wrap:has(#srv-tab-investments:checked) label[for='srv-tab-investments'] .text-sama-navy\/50,
-  .srv-wrap:has(#srv-tab-vehicle:checked) label[for='srv-tab-vehicle'] .text-sama-navy\/50,
-  .srv-wrap:has(#srv-tab-tax-legal:checked) label[for='srv-tab-tax-legal'] .text-sama-navy\/50,
-  .srv-wrap:has(#srv-tab-support:checked) label[for='srv-tab-support'] .text-sama-navy\/50 {
-    color: rgb(226 38 44 / 0.8);
-  }
-
-  .srv-wrap:has(#srv-tab-insurance:checked) label[for='srv-tab-insurance'] svg,
-  .srv-wrap:has(#srv-tab-loans:checked) label[for='srv-tab-loans'] svg,
-  .srv-wrap:has(#srv-tab-investments:checked) label[for='srv-tab-investments'] svg,
-  .srv-wrap:has(#srv-tab-vehicle:checked) label[for='srv-tab-vehicle'] svg,
-  .srv-wrap:has(#srv-tab-tax-legal:checked) label[for='srv-tab-tax-legal'] svg,
-  .srv-wrap:has(#srv-tab-support:checked) label[for='srv-tab-support'] svg {
-    color: rgba(255, 255, 255, 0.85);
-  }
+  @media (prefers-reduced-motion: reduce) { .service-card { transition: none; } .service-card:hover { transform: none; } }
 </style>

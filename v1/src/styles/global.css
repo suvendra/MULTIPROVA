@@ -35,6 +35,7 @@
 
 @layer base {
   :root {
+    --site-header-height: 92px;
     /* Sampled from the supplied logo's lettering, from top to bottom.
        Button gold stops at the logo's midtone to keep its label readable. */
     --brand-gradient-blue: linear-gradient(to bottom, #053d91, #03327e);
@@ -43,7 +44,7 @@
   }
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 92px;
+    scroll-padding-top: var(--site-header-height);
   }
   body {
     @apply bg-white font-sans text-sama-navy antialiased;
@@ -182,3 +183,5 @@
   html { scroll-behavior: auto; }
   .animate-floaty, .animate-floaty-slow, .animate-pulse-glow, .animate-ping { animation: none; }
 }
+
+@media (max-width: 1023px) { :root { --site-header-height: 72px; } }
