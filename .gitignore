@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+
+# Build output and framework caches
+dist/
+dist-ssr/
+.astro/
+.output/
+.vinxi/
+.tanstack/
+.nitro/
+.vite/
+.cache/
+.wrangler/
+*.tsbuildinfo
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+!.dev.vars.sample
+
+# Logs and test output
+logs/
+*.log
+coverage/
+playwright-report/
+test-results/
+
+# Operating system files
+.DS_Store
+Thumbs.db

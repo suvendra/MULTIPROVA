@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import ArtIcon from '../components/ArtIcon.astro';
+import { categories } from '../data/services';
+import { products, productHref } from '../data/products';
+
+const total = categories.reduce((n, c) => n + c.items.length, 0);
+---
+<BaseLayout
+  title="All Services"
+  description={`Explore all ${total} MULTIPROVA services — insurance, loans, investments, vehicle services, tax & legal and dedicated support, all under one roof.`}
+>
+  <!-- Page hero -->
+  <section class="bg-gradient-to-b from-white via-[#f2f6fd] to-[#e7effb]">
+    <div class="container-x py-14 text-center sm:py-16">
+      <p class="eyebrow">One trusted partner</p>
+      <h1 class="mt-2 font-display text-4xl font-extrabold tracking-tight text-sama-navy sm:text-5xl">
+        All {total} services,<br class="sm:hidden" /> under one roof
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-sama-navy/70">
+        Insurance, loans, investments, vehicle services, tax &amp; legal and support — explore everything MULTIPROVA offers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Catalogue -->
+  <section class="section bg-sama-slate">
+    <div class="container-x space-y-14">
+      {categories.map((c) => (
+        <div id={c.id} class="scroll-mt-28">
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 class="font-display text-2xl font-bold text-sama-navy sm:text-3xl">{c.label}</h2>
+              <p class="mt-1 text-sm text-sama-navy/60">{c.tagline}</p>
+            </div>
+            <span class="rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-sama-navy ring-1 ring-sama-navy/10">
+              {c.items.length} products
+            </span>
+          </div>
+
+          <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {c.items.map((s) => (
+              <article id={s.id} class="scroll-mt-28 rounded-2xl bg-white p-6 ring-1 ring-sama-navy/5 transition hover:shadow-xl hover:shadow-sama-navy/5">
+                <div class="flex items-center gap-4">
+                  <ArtIcon name={s.icon} class="h-14 w-14" />
+                  <div>
+                    <h3 class="font-display text-lg font-bold text-sama-navy">{s.name}</h3>
+                    <p class="text-xs text-sama-navy/55">{s.tagline}</p>
+                  </div>
+                </div>
+                <ul class="mt-4 space-y-2 border-t border-sama-navy/10 pt-4 text-sm text-sama-navy/70">
+                  {s.bullets.map((b) => (
+                    <li class="flex items-start gap-2">
+                      <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-gold-ink" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                {products.some(p => p.id === s.id) && <a href={productHref(s.id)} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold-ink">Explore service <Icon name="arrow-right" class="h-4 w-4" /></a>}
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

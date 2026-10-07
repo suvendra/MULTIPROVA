@@ -1,0 +1,55 @@
+---
+import { getSpriteInfo } from './product-sprite-coords';
+
+interface Props {
+  name: string;
+  class?: string;
+  label?: string;
+}
+
+const { name, class: className = '', label } = Astro.props;
+const sprite = getSpriteInfo(name);
+---
+{sprite ? (
+  <span
+    class:list={['product-icon-frame', className]}
+    role={label ? 'img' : undefined}
+    aria-label={label ?? sprite.label}
+    aria-hidden={label ? undefined : 'true'}
+  >
+    <img
+      src="/product_icons2.png"
+      alt={label ?? sprite.label}
+      class="product-icon-sheet"
+      style={{
+        left: `${sprite.leftPercent}%`,
+        top: `${sprite.topPercent}%`,
+        transform: sprite.scale !== 1 ? `scale(${sprite.scale})` : undefined,
+      }}
+      loading="lazy"
+      decoding="async"
+    />
+  </span>
+) : null}
+
+<style>
+  .product-icon-frame {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    vertical-align: middle;
+    pointer-events: none;
+  }
+
+  .product-icon-sheet {
+    position: absolute;
+    width: 900%;
+    max-width: none !important;
+    height: auto;
+    object-fit: contain;
+    user-select: none;
+    pointer-events: none;
+    display: block;
+  }
+</style>

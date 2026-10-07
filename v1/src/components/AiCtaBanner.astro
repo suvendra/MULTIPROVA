@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import ArtIcon from './ArtIcon.astro';
+import Robot from './Robot.astro';
+import { SITE } from '../config';
+---
+<section class="section bg-white" aria-labelledby="advice-heading">
+  <div class="container-x">
+    <div class="advice-panel">
+      <div class="advice-copy">
+        <p class="advice-eyebrow"><span></span> TECHNOLOGY MEETS A HUMAN TOUCH</p>
+        <h2 id="advice-heading">Advice that&apos;s smart.<br /><span>Support that&apos;s human.</span></h2>
+        <p class="advice-description">A little clarity. A lot of care. Get personalised recommendations from MULTIPROVA AI, with our expert advisors by your side.</p>
+        <div class="advice-actions">
+          <a href={`tel:${SITE.contact.phone}`} class="btn btn-white">Talk to an Expert <Icon name="arrow-right" class="h-4 w-4" /></a>
+          <a href="#faq" class="advice-link">Explore common questions <Icon name="arrow-right" class="h-4 w-4" /></a>
+        </div>
+      </div>
+      <div class="advice-visual">
+        <div class="advice-halo" aria-hidden="true"></div>
+        <div class="companion companion-ai">
+          <div class="companion-portrait"><Robot compact /></div>
+          <div class="companion-caption"><span class="companion-dot"></span><strong>MULTIPROVA AI</strong><small>Smart guidance</small></div>
+        </div>
+        <span class="companion-plus" aria-hidden="true">+</span>
+        <div class="companion companion-human">
+          <div class="companion-portrait"><ArtIcon name="advisor" class="advisor-art" label="MULTIPROVA expert advisor" /></div>
+          <div class="companion-caption"><span class="companion-dot"></span><strong>Real people</strong><small>Personal support</small></div>
+        </div>
+        <p class="advice-visual-note">Together, focused on you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .advice-panel { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: 40px; padding: 64px; border-radius: 32px; background: radial-gradient(ellipse at 95% 10%, #304b95 0%, transparent 60%), #111d4b; box-shadow: 0 20px 50px #16215c16; }
+  .advice-panel::after { content: ''; position: absolute; z-index: -1; width: 570px; height: 570px; border: 1px solid #ffffff0d; border-radius: 50%; right: -120px; top: -140px; }
+  .advice-eyebrow { display: flex; align-items: center; gap: 9px; color: #c0cff4; font-size: 10px; font-weight: 600; letter-spacing: .16em; margin-bottom: 22px; }
+  .advice-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--color-brand-gold); }
+  h2 { font-size: clamp(26px, 2.65vw, 36px); font-weight: 600; line-height: 1.35; letter-spacing: -.035em; color: white; }
+  h2 span { color: #abc6ff; }
+  .advice-description { color: #c3cee6; max-width: 470px; font-size: 15px; line-height: 1.8; margin-top: 20px; }
+  .advice-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 30px; }
+  .advice-link { display: inline-flex; align-items: center; gap: 8px; color: #e2eaff; font-size: 12px; font-weight: 500; }
+  .advice-link:hover { color: white; text-decoration: underline; text-underline-offset: 5px; }
+  .advice-visual { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 20px 0 42px; }
+  .advice-halo { position: absolute; width: 330px; height: 330px; border: 1px solid #ffffff12; border-radius: 50%; background: radial-gradient(circle, #7ca8ff20, transparent 70%); pointer-events: none; }
+  .companion { position: relative; width: 155px; padding: 12px 10px 18px; border: 1px solid #ffffff22; border-radius: 80px 80px 24px 24px; background: linear-gradient(150deg, #ffffff18, #ffffff05); text-align: center; box-shadow: 0 16px 30px #060e2d20; }
+  .companion-ai { transform: translateY(-12px); }
+  .companion-human { transform: translateY(12px); }
+  .companion-portrait { height: 170px; display: flex; align-items: center; justify-content: center; }
+  .companion-portrait :global(.sama-mascot .robot-image) { width: 150px; height: 170px; }
+  .companion-portrait :global(.advisor-art) { width: 125px; height: 140px; }
+  .companion-caption strong { color: white; font-size: 14px; font-weight: 600; }
+  .companion-caption small { display: block; margin-top: 4px; color: #c3cee6; font-size: 11px; }
+  .companion-dot { display: inline-block; width: 5px; height: 5px; margin-right: 6px; border-radius: 50%; background: #81dabd; vertical-align: middle; }
+  .companion-plus { z-index: 1; color: #b6cbff; font-size: 22px; font-weight: 300; }
+  .advice-visual-note { position: absolute; bottom: 0; color: #b7c7e8; font-size: 11px; letter-spacing: .05em; }
+  @media (max-width: 1023px) { .advice-panel { padding: 40px 28px; gap: 30px; grid-template-columns: 1fr; } .advice-copy { text-align: center; } .advice-eyebrow, .advice-actions { justify-content: center; } .advice-description { margin-inline: auto; } }
+  @media (max-width: 399px) { .advice-panel { padding-inline: 20px; } .advice-visual { gap: 8px; } .companion { width: 120px; padding-inline: 4px; } .companion-portrait { height: 145px; } .companion-portrait :global(.sama-mascot .robot-image) { width: 125px; height: 145px; } .companion-portrait :global(.advisor-art) { width: 105px; height: 125px; } }
+</style>

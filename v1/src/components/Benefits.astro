@@ -1,0 +1,29 @@
+---
+import ArtIcon from './ArtIcon.astro';
+
+interface Benefit { icon: string; title: string; desc: string; }
+const benefits: Benefit[] = [
+  { icon: 'trusted-protection', title: 'Trusted Protection', desc: 'Plans from top insurers you can rely on.' },
+  { icon: 'expert-support', title: 'Expert Support', desc: 'Real experts to guide you at every step.' },
+  { icon: 'customised-solutions', title: 'Customised Solutions', desc: 'Plans tailored to your needs and budget.' },
+  { icon: 'quick-claim', title: 'Cashless & Quick Assistance', desc: 'Hassle-free claims and fast settlements.' },
+];
+---
+<section class="section bg-[#f8fafc]" id="why-sama">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">WHY MULTIPROVA?</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Benefits that put you first</h2>
+    </div>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {benefits.map((b) => (
+        <div class="flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-7 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md">
+          <ArtIcon name={b.icon} class="h-14 w-14" />
+          <h3 class="mt-4 font-display text-base font-bold text-sama-navy">{b.title}</h3>
+          <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-500">{b.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

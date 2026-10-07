@@ -1,0 +1,181 @@
+---
+import { SITE } from '../config';
+import { allServices } from '../data/services';
+import { productHref } from '../data/products';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+const servicesById = new Map(allServices.map((service) => [service.id, service]));
+const menuGroup = (label: string, description: string, ids: string[], columns = 1) => ({
+  label,
+  description,
+  columns,
+  items: ids.flatMap((id) => {
+    const service = servicesById.get(id);
+    return service ? [{ ...service, href: productHref(service.id) }] : [];
+  }),
+});
+
+const serviceMenus = [
+  menuGroup(
+    'Insurance',
+    'Protect your health, family, income and travels.',
+    ['insurance', 'term-plan', 'pa', 'critical-care', 'wellness', 'hospicash', 'travel', 'emi-protect', 'claims'],
+    2,
+  ),
+  menuGroup(
+    'Loans & Credit',
+    'Borrow with clarity and build stronger credit.',
+    ['loan-one-stop', 'personal', 'business', 'mortgage', 'education', 'gold', 'cibil', 'credit-card'],
+    2,
+  ),
+  menuGroup(
+    'Investments',
+    'Plan for long-term goals and regular income.',
+    ['mutual-fund', 'fd', 'pension'],
+  ),
+  menuGroup(
+    'More Services',
+    'Vehicle, tax and legal help in one place.',
+    ['rsa', 'inspection', 'new-vehicle', 'used-vehicle', 'fastag', 'it-returns', 'litigation'],
+    2,
+  ),
+];
+
+const companyLinks = [
+  { label: 'Why MULTIPROVA', description: 'What makes our guidance different', href: '/#why-sama' },
+  { label: 'How it works', description: 'From enquiry to expert support', href: '/#how-it-works' },
+  { label: 'Customer stories', description: 'Hear from people we have helped', href: '/#testimonials' },
+  { label: 'FAQs', description: 'Answers to common questions', href: '/#faq' },
+];
+---
+<header class="sticky top-0 z-50 border-b border-sama-navy/10 bg-white/95 shadow-sm backdrop-blur">
+  <div class="container-x flex items-center justify-between gap-4 py-3">
+    <Logo />
+
+    <nav class="hidden items-center gap-0.5 text-[13.5px] font-medium text-sama-navy lg:flex" aria-label="Primary navigation">
+      {serviceMenus.map((menu) => (
+        <div class="group relative">
+          <button
+            type="button"
+            class="inline-flex items-center gap-1 rounded-full px-3 py-2 transition hover:bg-sama-slate hover:text-brand-gold-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-ink/30"
+            aria-haspopup="true"
+          >
+            {menu.label}
+            <Icon name="chevron-down" class="h-3.5 w-3.5 opacity-60 transition group-hover:rotate-180 group-focus-within:rotate-180" />
+          </button>
+
+          <div class:list={[
+            'invisible absolute left-1/2 top-full z-50 -translate-x-1/2 rounded-2xl bg-white p-3 opacity-0 shadow-2xl ring-1 ring-sama-navy/10 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100',
+            menu.columns === 2 ? 'w-[520px]' : 'w-72',
+          ]}>
+            <div class="px-2 pb-2 pt-1">
+              <p class="font-display text-sm font-bold text-sama-navy">{menu.label}</p>
+              <p class="mt-0.5 text-xs font-normal text-sama-navy/55">{menu.description}</p>
+            </div>
+            <div class:list={['grid gap-1 border-t border-sama-navy/10 pt-2', menu.columns === 2 && 'grid-cols-2']}>
+              {menu.items.map((item) => (
+                <a href={item.href} class="group/item flex items-center gap-2 rounded-xl px-2.5 py-2.5 hover:bg-sama-slate">
+                  <span class="min-w-0">
+                    <span class="block truncate text-sm font-semibold text-sama-navy group-hover/item:text-brand-gold-ink">{item.name}</span>
+                    <span class="block truncate text-[11px] font-normal text-sama-navy/50">{item.tagline}</span>
+                  </span>
+                  <Icon name="chevron-right" class="ml-auto h-3.5 w-3.5 shrink-0 text-brand-gold-ink/70" />
+                </a>
+              ))}
+            </div>
+            <a href="/services/" class="btn-blue mt-2 flex items-center justify-center gap-1 rounded-xl bg-sama-navy px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-sama-navy-800">
+              View all services <Icon name="arrow-right" class="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      ))}
+
+      <div class="group relative">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1 rounded-full px-3 py-2 transition hover:bg-sama-slate hover:text-brand-gold-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-ink/30"
+          aria-haspopup="true"
+        >
+          About
+          <Icon name="chevron-down" class="h-3.5 w-3.5 opacity-60 transition group-hover:rotate-180 group-focus-within:rotate-180" />
+        </button>
+        <div class="invisible absolute right-0 top-full z-50 w-72 rounded-2xl bg-white p-3 opacity-0 shadow-2xl ring-1 ring-sama-navy/10 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+          {companyLinks.map((link) => (
+            <a href={link.href} class="group/item flex items-center gap-2 rounded-xl px-3 py-2.5 hover:bg-sama-slate">
+              <span>
+                <span class="block text-sm font-semibold text-sama-navy group-hover/item:text-brand-gold-ink">{link.label}</span>
+                <span class="block text-[11px] font-normal text-sama-navy/50">{link.description}</span>
+              </span>
+              <Icon name="chevron-right" class="ml-auto h-3.5 w-3.5 shrink-0 text-brand-gold-ink/70" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href={`tel:${SITE.contact.phone}`} class="hidden h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-brand-gold-ink hover:text-brand-gold-ink md:inline-flex" aria-label={`Call us on ${SITE.contact.phone}`}>
+        <Icon name="phone" class="h-4 w-4" />
+      </a>
+      <a href={`tel:${SITE.contact.phone}`} class="inline-flex items-center justify-center rounded-full btn-gold bg-brand-gold px-5 py-2.5 text-xs font-semibold shadow-sm transition hover:bg-brand-gold-hover sm:text-sm lg:whitespace-nowrap">Get Expert Advice</a>
+
+      <input type="checkbox" id="mobile-menu-toggle" class="sr-only" aria-hidden="true" />
+      <label for="mobile-menu-toggle" class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-sama-navy text-white lg:hidden" aria-label="Toggle menu">
+        <Icon name="menu" class="h-5 w-5" />
+      </label>
+    </div>
+  </div>
+
+  <div class="mobile-menu invisible absolute inset-x-0 top-full max-h-[calc(100vh-76px)] overflow-y-auto border-b bg-white opacity-0 shadow-2xl ring-1 ring-sama-navy/10 transition lg:hidden">
+    <nav class="container-x py-4 text-sm text-sama-navy" aria-label="Mobile navigation">
+      <a href="/services/" class="mb-2 flex items-center justify-between rounded-xl bg-sama-slate px-4 py-3 font-bold">
+        Explore all services
+        <Icon name="arrow-right" class="h-4 w-4 text-brand-gold-ink" />
+      </a>
+
+      {serviceMenus.map((menu) => (
+        <details class="group/mobile border-b border-sama-navy/10">
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3.5 font-semibold marker:content-none">
+            {menu.label}
+            <Icon name="chevron-down" class="h-4 w-4 opacity-60 transition group-open/mobile:rotate-180" />
+          </summary>
+          <div class="grid gap-1 pb-3 pl-3 sm:grid-cols-2">
+            {menu.items.map((item) => (
+              <a href={item.href} class="rounded-xl px-4 py-2.5 hover:bg-sama-slate">
+                <span class="block font-semibold">{item.name}</span>
+                <span class="block text-xs font-normal text-sama-navy/50">{item.tagline}</span>
+              </a>
+            ))}
+          </div>
+        </details>
+      ))}
+
+      <details class="group/mobile border-b border-sama-navy/10">
+        <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3.5 font-semibold marker:content-none">
+          About MULTIPROVA
+          <Icon name="chevron-down" class="h-4 w-4 opacity-60 transition group-open/mobile:rotate-180" />
+        </summary>
+        <div class="grid gap-1 pb-3 pl-3 sm:grid-cols-2">
+          {companyLinks.map((link) => (
+            <a href={link.href} class="rounded-xl px-4 py-2.5 hover:bg-sama-slate">
+              <span class="block font-semibold">{link.label}</span>
+              <span class="block text-xs font-normal text-sama-navy/50">{link.description}</span>
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <a href={`tel:${SITE.contact.phone}`} class="btn btn-primary mt-4"><Icon name="phone" class="h-4 w-4" />Talk to an expert</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1023px) {
+    header:has(#mobile-menu-toggle:checked) .mobile-menu {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+}
+
+const { title, description, noIndex } = Astro.props;
+const brandTitle = `${SITE.name} | ${SITE.alternateNames[0]}`;
+const pageTitle = title ? `${title} | ${brandTitle}` : brandTitle;
+const pageDescription = description
+  ? `${description} ${SITE.name} by ${SITE.alternateNames[0]}.`
+  : SITE.description;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const logoUrl = new URL(SITE.logo, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content={SITE.themeColor} />
+    {noIndex && <meta name="robots" content="noindex" />}
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={logoUrl} />
+    <meta property="og:image:width" content="784" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:image:alt" content={`${SITE.name} logo`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={logoUrl} />
+    <meta name="twitter:image:alt" content={`${SITE.name} logo`} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FinancialService',
+      name: SITE.name,
+      alternateName: SITE.alternateNames,
+      logo: logoUrl,
+      image: logoUrl,
+      description: SITE.description,
+      url: SITE.url,
+      telephone: SITE.contact.phone,
+      email: SITE.contact.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: SITE.contact.addressLine1,
+        addressLocality: 'Bangalore',
+        addressRegion: 'Karnataka',
+        addressCountry: 'IN',
+      },
+      sameAs: [SITE.social.linkedin, SITE.social.facebook, SITE.social.instagram],
+    })} />
+  </head>
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

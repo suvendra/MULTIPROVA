@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductIcon from '../components/ProductIcon.astro';
+import { allServices } from '../data/services';
+
+const spriteList = [
+  // Row 1
+  { name: 'cibil', label: 'Cibil' },
+  { name: 'insurance', label: 'Insurance' },
+  { name: 'rsa', label: 'RSA' },
+  { name: 'pa-policy', label: 'PA Policy' },
+  { name: 'claim-services', label: 'Claim Services' },
+  { name: 'it-returns', label: 'IT Returns' },
+  { name: 'litigation', label: 'Litigation' },
+  { name: 'emi-protect', label: 'EMI Protect' },
+  { name: 'hospicash', label: 'Hospicash' },
+  // Row 2
+  { name: 'travel', label: 'Travel' },
+  { name: 'critical-care', label: 'Critical Care' },
+  { name: 'wellness', label: 'Wellness' },
+  { name: 'inspection-of-vehicles', label: 'Inspection' },
+  { name: 'term-plan', label: 'Term Plan' },
+  { name: 'pension-plan', label: 'Pension Plan' },
+  { name: 'fastag', label: 'Fastag' },
+  { name: 'mutual-fund', label: 'Mutual Funds' },
+  { name: 'mortgage-loans', label: 'Mortgage' },
+  // Row 3
+  { name: 'education-loan', label: 'Education Loan' },
+  { name: 'personal-loan', label: 'Personal Loan' },
+  { name: 'business-loan', label: 'Business Loan' },
+  { name: 'credit-card', label: 'Credit Card' },
+  { name: 'loans', label: 'Loans / Growth' },
+  { name: 'gold-loan', label: 'Gold Loan' },
+  { name: 'new-vehicle-sell', label: 'New Vehicle' },
+  { name: 'used-vehicle-sell', label: 'Used Vehicle' },
+  { name: 'fd', label: 'Fixed Deposits' },
+];
+---
+
+<BaseLayout title="Product Sprite Test">
+  <div class="container-x py-12">
+    <h1 class="text-2xl font-bold mb-6">27 Product Icons Sprite Test</h1>
+
+    <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-4 bg-slate-100 p-6 rounded-2xl">
+      {spriteList.map((item, idx) => (
+        <div class="flex flex-col items-center bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+          <span class="text-[10px] text-slate-400 font-mono mb-1">#{idx + 1}</span>
+          <ProductIcon name={item.name} class="w-16 h-16" />
+          <span class="text-xs font-semibold text-center mt-2 text-slate-700 leading-tight">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

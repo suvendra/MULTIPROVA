@@ -1,0 +1,12 @@
+{
+  // Deployment config for static Astro output on Cloudflare Workers static assets.
+  // Update "compatibility_date" to the day you deploy if you want a newer one.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "samainsurance-v3",
+  "compatibility_date": "2026-04-09",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": false
+}

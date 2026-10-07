@@ -1,0 +1,135 @@
+---
+import { SITE } from '../config';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Insurance',
+    links: [
+      { label: 'Term Plan', href: '/services#term-plan' },
+      { label: 'Health Insurance', href: '/services#feat-health' },
+      { label: 'PA Policy', href: '/products/pa/' },
+      { label: 'Travel Insurance', href: '/services#travel' },
+      { label: 'Claim Services', href: '/products/claims/' },
+      { label: 'View all →', href: '/services#insurance', accent: true },
+    ],
+  },
+  {
+    title: 'Loans',
+    links: [
+      { label: 'Personal Loan', href: '/services#personal' },
+      { label: 'Home Loan', href: '/services#home' },
+      { label: 'Gold Loan', href: '/services#gold' },
+      { label: 'Education Loan', href: '/services#education' },
+      { label: 'Business Loan', href: '/services#business' },
+      { label: 'View all →', href: '/services#loans', accent: true },
+    ],
+  },
+  {
+    title: 'Investments',
+    links: [
+      { label: 'Mutual Funds', href: '/services#mutual-fund' },
+      { label: 'Fixed Deposit (FD)', href: '/services#fd' },
+      { label: 'Pension Plan', href: '/services#pension' },
+      { label: 'View all →', href: '/services#investments', accent: true },
+    ],
+  },
+  {
+    title: 'Help & Support',
+    links: [
+      { label: 'Track Claim', href: '/products/claims/' },
+      { label: 'Download Documents', href: '/services#support' },
+      { label: 'FAQs', href: '/#faq' },
+      { label: 'Contact Us', href: `tel:${SITE.contact.phone}` },
+      { label: 'Branch Locator', href: '/services#support' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About Us', href: '/#why-sama' },
+      { label: 'Careers', href: '/services/' },
+      { label: 'Partner With Us', href: '/services/' },
+      { label: 'MULTIPROVA in News', href: '/services/' },
+    ],
+  },
+];
+
+const socials = [
+  { icon: 'facebook', href: SITE.social.facebook, label: 'Facebook' },
+  { icon: 'instagram', href: SITE.social.instagram, label: 'Instagram' },
+  { icon: 'youtube', href: SITE.social.youtube, label: 'YouTube' },
+  { icon: 'linkedin', href: SITE.social.linkedin, label: 'LinkedIn' },
+];
+---
+<footer class="bg-[#0c1330] text-white">
+  <div class="container-x grid grid-cols-2 gap-8 py-14 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] lg:gap-6">
+    <!-- Brand -->
+    <div class="col-span-2 md:col-span-3 lg:col-span-1 pr-4">
+      <Logo variant="light" />
+      <p class="mt-3 text-xs text-slate-300">MULTIPROVA by {SITE.alternateNames[0]}</p>
+      <p class="mt-4 max-w-xs text-xs sm:text-sm leading-relaxed text-slate-300">
+        One trusted partner for insurance, loans, investments and financial services.
+      </p>
+      <div class="mt-5 flex gap-2.5">
+        {socials.map((s) => (
+          <a href={s.href} class="inline-flex h-8 w-8 items-center justify-center rounded-full ring-1 ring-white/20 transition hover:bg-white/10" aria-label={s.label} rel="noopener" target="_blank">
+            <Icon name={s.icon} class="h-3.5 w-3.5" />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Link columns -->
+    {columns.map((col) => (
+      <nav aria-label={col.title}>
+        <h3 class="font-display text-xs sm:text-sm font-bold text-white tracking-wide">{col.title}</h3>
+        <ul class="mt-3.5 space-y-2 text-xs sm:text-[13px]">
+          {col.links.map((l) => (
+            <li>
+              <a href={l.href} class:list={['transition', l.accent ? 'font-semibold text-white/90 hover:text-white' : 'text-slate-300 hover:text-white']}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ))}
+  </div>
+
+  <!-- Contact / legal info bar -->
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-wrap items-center gap-x-8 gap-y-3 py-5 text-sm text-white/75">
+      <a href={`tel:${SITE.contact.phone}`} class="flex items-center gap-2 transition hover:text-white">
+        <Icon name="phone" class="h-4 w-4 text-white/50" />
+        <span>{SITE.contact.phone} <span class="text-white/45">({SITE.contact.hours})</span></span>
+      </a>
+      <a href={`mailto:${SITE.contact.email}`} class="flex items-center gap-2 transition hover:text-white">
+        <Icon name="mail" class="h-4 w-4 text-white/50" />
+        {SITE.contact.email}
+      </a>
+      <span class="flex items-center gap-2">
+        <Icon name="pin" class="h-4 w-4 text-white/50" />
+        {SITE.contact.city}
+      </span>
+      <span class="text-white/45">{SITE.legal.irdai} · {SITE.legal.cin}</span>
+    </div>
+  </div>
+
+  <!-- Legal row -->
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-3 py-4 text-xs text-white/50 sm:flex-row">
+      <p>© {year} {SITE.name}. All rights reserved.</p>
+      <div class="flex items-center gap-2">
+        <a href="/#" class="transition hover:text-white">Privacy Policy</a>
+        <span aria-hidden="true">|</span>
+        <a href="/#" class="transition hover:text-white">Terms &amp; Conditions</a>
+        <span aria-hidden="true">|</span>
+        <a href="/#" class="transition hover:text-white">Grievance Redressal</a>
+      </div>
+    </div>
+  </div>
+</footer>

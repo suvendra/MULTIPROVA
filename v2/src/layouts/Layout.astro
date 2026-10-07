@@ -1,0 +1,10 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/inter';
+const {title='SAMA Insurance — For every next chapter.',description='Thoughtful guidance for protection, borrowing, wealth and everyday life. Explore 27 services with SAMA Insurance.'}=Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><title>{title}</title><link rel="icon" href="/logo.png"/></head><body>
+<header class="header"><a href="/" aria-label="SAMA Insurance home"><img src="/logo.png" alt="SAMA Insurance — Protecting today, securing tomorrow" width="220" height="79"/></a><nav aria-label="Main navigation"><a href="/services/">Explore services</a><a href="/#approach">Our approach</a><a href="/#questions">Common questions</a></nav><a class="button small" href="/contact/">Let’s talk <span>↗</span></a><button class="menu" aria-label="Open navigation" aria-expanded="false">☰</button></header>
+<main><slot/></main><footer class="footer"><div class="footer-top"><div><img src="/logo.png" alt="SAMA Insurance" width="200" height="72"/><p>For the life you’re living.<br/>And the one you’re building.</p></div><div><span class="eyebrow">FIND YOUR NEXT STEP</span><a href="/services/?category=Protection">Protect what matters</a><a href="/services/?category=Borrowing">Fund a new possibility</a><a href="/services/?category=Wealth">Plan for tomorrow</a></div><div><span class="eyebrow">LET’S CONNECT</span><a href="/contact/">Start a conversation ↗</a><a href="/services/">All 27 services</a><a href="/#approach">The SAMA approach</a></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SAMA Insurance</span><span>Protecting today. Securing tomorrow.</span><a href="/privacy/">Privacy</a></div></footer>
+<script>const menu=document.querySelector('.menu');menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));document.querySelector('.header')?.classList.toggle('nav-open',open)});</script>
+</body></html>

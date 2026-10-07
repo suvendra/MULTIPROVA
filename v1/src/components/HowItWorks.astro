@@ -1,0 +1,39 @@
+---
+import Icon from './Icon.astro';
+import ArtIcon from './ArtIcon.astro';
+
+interface Step { n: string; accent: string; icon: string; title: string; desc: string; }
+const steps: Step[] = [
+  { n: '1', accent: 'bg-sama-navy', icon: 'step-1', title: 'Tell us what you need', desc: 'Share your goals and requirements in minutes.' },
+  { n: '2', accent: 'bg-brand-gold-ink', icon: 'step-2', title: 'Compare & choose', desc: 'We show the best options. You decide with confidence.' },
+  { n: '3', accent: 'bg-sama-navy', icon: 'step-3', title: 'Get assisted end-to-end', desc: "From purchase to claims, we're with you always." },
+];
+---
+<section class="section bg-white" id="how-it-works">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">HOW IT WORKS</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Simple steps to complete peace of mind</h2>
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-center gap-4 md:flex-row md:items-stretch lg:gap-6">
+      {steps.map((s, i) => (
+        <>
+          <div class="flex flex-1 w-full max-w-sm flex-col items-center justify-between rounded-2xl border border-slate-100 bg-white px-6 py-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md">
+            <div class="flex flex-col items-center">
+              <span class:list={['inline-flex h-9 w-9 items-center justify-center rounded-full font-display text-sm font-bold text-white', s.accent]}>{s.n}</span>
+              <h3 class="mt-4 font-display text-base sm:text-lg font-bold text-sama-navy">{s.title}</h3>
+              <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-500">{s.desc}</p>
+            </div>
+            <ArtIcon name={s.icon} class="mt-6 h-12 w-12 sm:h-14 sm:w-14" />
+          </div>
+          {i < steps.length - 1 && (
+            <div class="hidden shrink-0 items-center justify-center text-slate-300 md:flex" aria-hidden="true">
+              <Icon name="arrow-right" class="h-5 w-5" />
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+</section>

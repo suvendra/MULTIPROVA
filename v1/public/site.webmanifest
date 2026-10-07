@@ -1,0 +1,10 @@
+{
+  "name": "MULTIPROVA",
+  "short_name": "MULTIPROVA",
+  "description": "MULTIPROVA by SAMA Insurance - a trusted one-stop partner for insurance, loans, investments and financial services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#083888",
+  "icons": []
+}

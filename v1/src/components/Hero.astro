@@ -1,0 +1,116 @@
+---
+import Icon from './Icon.astro';
+import ArtIcon from './ArtIcon.astro';
+import Robot from './Robot.astro';
+import { SITE } from '../config';
+
+const features = [
+  { icon: 'hero-services', title: '27+ Services', desc: 'All your needs, one place' },
+  { icon: 'hero-digital', title: '100% Digital', desc: 'Simple, secure & paperless' },
+  { icon: 'hero-support', title: 'Expert Support', desc: 'Real people, real help' },
+];
+
+const goals = [
+  { icon: 'goal-save', label: 'Save Smart' },
+  { icon: 'goal-protect', label: 'Stay Protected' },
+  { icon: 'goal-grow', label: 'Grow Wealth' },
+  { icon: 'goal-achieve', label: 'Achieve Goals' },
+];
+---
+<section class="sama-hero relative overflow-hidden">
+  <div class="hero-ambient" aria-hidden="true"></div>
+  <div class="container-x relative grid items-center gap-12 pb-24 pt-12 sm:pt-16 lg:grid-cols-2 lg:pb-28">
+    <!-- Left: copy -->
+    <div class="relative z-10 text-center lg:text-left">
+      <h1 class="font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl xl:text-[3.4rem]">
+        <span class="brand-text-blue block">Complete Coverage.</span>
+        <span class="brand-text-gold block">Complete Peace of Mind.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-sama-navy/70 sm:text-lg lg:mx-0">
+        One trusted partner for insurance, loans, investments and financial services — at every stage of your life.
+      </p>
+
+      <!-- Mini feature row -->
+      <div class="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-3.5 sm:grid-cols-3 lg:mx-0">
+        {features.map((f) => (
+          <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 p-3 text-left shadow-sm backdrop-blur-sm">
+            <ArtIcon name={f.icon} class="h-9 w-9 shrink-0" />
+            <span class="leading-tight">
+              <strong class="block font-display text-xs sm:text-[13px] font-bold text-sama-navy">{f.title}</strong>
+              <span class="text-[11px] text-slate-500">{f.desc}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTAs -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+        <a href="/services/" class="btn-blue inline-flex items-center justify-center gap-2 rounded-full bg-sama-navy px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-sama-navy/20 transition hover:bg-sama-navy-800">
+          Explore Services <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+        <a href={`tel:${SITE.contact.phone}`} class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-sama-navy shadow-sm transition hover:border-slate-300 hover:bg-slate-50">
+          Talk to an Expert
+          <Icon name="phone" class="h-4 w-4 text-slate-500" />
+        </a>
+      </div>
+
+      <!-- Trusted line -->
+      <p class="mt-7 flex items-center justify-center gap-2 text-sm text-sama-navy/70 lg:justify-start">
+        <Icon name="shield-check" class="h-5 w-5 text-brand-gold-ink" />
+        <span>Trusted by <strong class="font-semibold text-brand-gold-ink">5M+ families</strong> across India</span>
+      </p>
+    </div>
+
+    <!-- Right: robot + goals dock -->
+    <div class="hero-scene relative z-10 flex flex-col items-center">
+      <div class="hero-orbit hero-orbit--outer" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit--inner" aria-hidden="true"></div>
+      <Robot />
+      <!-- Unified Goals Dock -->
+      <div class="hero-goals relative mt-6 flex w-full max-w-lg items-center divide-x divide-slate-100 rounded-2xl bg-white p-2.5 shadow-xl shadow-sama-navy/5 ring-1 ring-slate-100">
+        {goals.map((g) => (
+          <div class="flex flex-1 flex-col items-center justify-center gap-1.5 px-3 py-1 text-center">
+            <ArtIcon name={g.icon} class="h-6 w-6" />
+            <span class="text-[11px] sm:text-xs font-semibold leading-tight text-sama-navy">{g.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<section class="relative z-10 -mt-6 pb-2" aria-label="Why families trust MULTIPROVA">
+  <div class="container-x">
+    <div class="grid grid-cols-2 gap-y-4 rounded-2xl bg-white p-5 shadow-lg shadow-sama-navy/5 ring-1 ring-slate-100 sm:grid-cols-4 sm:divide-x sm:divide-slate-100 sm:py-6">
+      {[
+        { icon: 'hero-services', value: '27+', label: 'Services' },
+        { icon: 'expert-support', value: 'Trusted', label: 'Expert Support' },
+        { icon: 'hero-digital', value: '100%', label: 'Digital Process' },
+        { icon: 'quick-claim', value: 'Fast', label: 'Assistance' },
+      ].map((item) => (
+        <div class="flex items-center justify-center gap-3.5 px-4">
+          <ArtIcon name={item.icon} class="h-8 w-8 sm:h-9 sm:w-9 shrink-0" />
+          <p class="leading-tight text-left">
+            <strong class="block font-display text-base sm:text-lg font-bold text-sama-navy">{item.value}</strong>
+            <span class="text-xs text-slate-500">{item.label}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sama-hero { background: linear-gradient(115deg, #fff 8%, #f7f9ff 48%, #eaf0fe 100%); }
+  .hero-ambient { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 80% 35%, #c9dbff80, transparent 48%), radial-gradient(ellipse at 5% 95%, #e3eafb, transparent 50%); }
+  .hero-scene { isolation: isolate; padding: 24px 0 0; }
+  .hero-scene::before { content: ''; position: absolute; z-index: -1; width: 380px; height: 380px; top: 105px; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #f9fbff, #d7e5ff 68%, #c5d8fb); box-shadow: inset 0 0 60px #ffffffb0, 0 30px 80px #728fc220; }
+  .hero-orbit { position: absolute; z-index: -1; border: 1px solid #b5c9ee70; border-radius: 50%; pointer-events: none; }
+  .hero-orbit--outer { width: 490px; height: 490px; top: 50px; }
+  .hero-orbit--inner { width: 440px; height: 440px; top: 75px; border-style: dashed; }
+  .hero-scene-label { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; color: #52658d; font-size: 10px; font-weight: 700; letter-spacing: .16em; }
+  .hero-scene-label span { width: 6px; height: 6px; border-radius: 50%; background: #457be0; }
+  .hero-goals { backdrop-filter: blur(16px); background: #ffffffdf; }
+  @media (max-width: 639px) { .hero-scene::before { width: 290px; height: 290px; top: 130px; } .hero-orbit--outer { width: 360px; height: 360px; top: 95px; } .hero-orbit--inner { width: 325px; height: 325px; top: 112px; } }
+</style>
