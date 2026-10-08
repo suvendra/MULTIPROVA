@@ -9,7 +9,7 @@ const benefits: Benefit[] = [
   { icon: 'quick-claim', title: 'Cashless & Quick Assistance', desc: 'Hassle-free claims and fast settlements.' },
 ];
 ---
-<section class="section bg-[#f8fafc]" id="why-sama">
+<section class="section benefits-section bg-white" id="why-sama">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">WHY MULTIPROVA?</p>
@@ -27,3 +27,8 @@ const benefits: Benefit[] = [
     </div>
   </div>
 </section>
+
+<style>
+  .benefits-section { padding-top: 40px; }
+  @media (min-width: 768px) { .benefits-section { padding-top: 64px; } }
+</style>

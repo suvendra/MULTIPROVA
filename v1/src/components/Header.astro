@@ -52,7 +52,7 @@ const menus = ['Insurance', 'Services', 'About'];
     </nav>
     <div class="flex items-center gap-2 sm:gap-3">
       <a href={`tel:${SITE.contact.phone}`} class="hidden h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-brand-gold-ink xl:inline-flex" aria-label={`Call us on ${SITE.contact.phone}`}><Icon name="phone" class="h-4 w-4" /></a>
-      <a href={`tel:${SITE.contact.phone}`} class="btn-gold inline-flex items-center justify-center whitespace-nowrap rounded-full bg-brand-gold px-3 py-2.5 text-xs font-semibold shadow-sm sm:px-5 sm:text-sm" aria-label="Get Expert Advice"><span class="sm:hidden">Get Advice</span><span class="hidden sm:inline">Get Expert Advice</span></a>
+      <a href={SITE.links.login} class="btn-gold inline-flex items-center justify-center whitespace-nowrap rounded-full bg-brand-gold px-3 py-2.5 text-xs font-semibold shadow-sm sm:px-5 sm:text-sm">Login</a>
       <button type="button" data-mobile-toggle class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sama-navy text-white lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><Icon name="menu" class="h-5 w-5" /></button>
     </div>
   </div>

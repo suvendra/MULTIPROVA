@@ -23,8 +23,9 @@ export const SITE = {
     irdai: 'IRDAI Lic. No. 123',
     cin: 'CIN: U74999KA2015PTC086123',
   },
-  // Temporary destinations until the client supplies the app and partner URLs.
+  // Temporary destinations until the client supplies the login, app and partner URLs.
   links: {
+    login: 'https://example.com/login',
     appStore: 'https://apps.apple.com/',
     googlePlay: 'https://play.google.com/store/apps',
     partner: 'https://example.com/',

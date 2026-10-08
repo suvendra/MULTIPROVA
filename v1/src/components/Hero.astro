@@ -1,83 +1,67 @@
 ---
 import Icon from './Icon.astro';
-import ArtIcon from './ArtIcon.astro';
 import Robot from './Robot.astro';
 import { SITE } from '../config';
-
-const goals = [
-  { icon: 'goal-save', label: 'Save Smart' },
-  { icon: 'goal-protect', label: 'Stay Protected' },
-  { icon: 'goal-grow', label: 'Plan Ahead' },
-  { icon: 'goal-achieve', label: 'Achieve Goals' },
-];
 ---
 <section class="sama-hero relative overflow-hidden">
   <div class="hero-ambient" aria-hidden="true"></div>
   <div class="container-x relative grid items-center hero-layout gap-5 py-5 lg:grid-cols-2 lg:gap-10">
     <!-- Left: copy -->
-    <div class="relative z-10 text-center lg:text-left">
+    <div class="hero-copy relative z-10 text-center md:text-left">
       <h1 class="font-display text-[2rem] font-extrabold leading-[1.12] tracking-tight sm:text-[2.6rem] xl:text-5xl">
         <span class="brand-text-blue block">Complete Coverage.</span>
         <span class="brand-text-gold block">Complete Peace of Mind.</span>
       </h1>
-      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-sama-navy/70 sm:text-base lg:mx-0">
+      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-sama-navy/70 sm:text-base md:mx-0">
         One trusted partner for insurance and everyday financial services — at every stage of your life.
       </p>
 
       <!-- CTAs -->
-      <div class="hero-actions mt-5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-        <a href="#services" class="btn-blue inline-flex items-center justify-center gap-2 rounded-full bg-sama-navy px-5 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sama-navy/20 transition hover:bg-sama-navy-800">
-          Explore Services <Icon name="arrow-right" class="h-4 w-4" />
+      <div class="hero-actions mt-5 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+        <a href={`tel:${SITE.contact.phone}`} class="btn-blue inline-flex items-center justify-center gap-2 rounded-full bg-sama-navy px-4 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sama-navy/20 transition hover:bg-sama-navy-800">
+          Talk to an Expert <Icon name="phone" class="h-4 w-4" />
         </a>
-        <a href={`tel:${SITE.contact.phone}`} class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-xs sm:text-sm font-semibold text-sama-navy shadow-sm transition hover:border-slate-300 hover:bg-slate-50">
-          Talk to an Expert
-          <Icon name="phone" class="h-4 w-4 text-slate-500" />
+        <a href={SITE.links.partner} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-xs sm:text-sm font-semibold text-sama-navy shadow-sm transition hover:border-slate-300 hover:bg-slate-50">
+          Become a Partner <Icon name="arrow-right" class="h-4 w-4" />
         </a>
       </div>
 
       <!-- Trusted line -->
-      <p class="mt-4 flex items-center justify-center gap-2 text-xs text-sama-navy/70 lg:justify-start">
+      <p class="mt-4 flex items-center justify-center gap-2 text-xs text-sama-navy/70 md:justify-start">
         <Icon name="shield-check" class="h-5 w-5 text-brand-gold-ink" />
         <span>Trusted by <strong class="font-semibold text-brand-gold-ink">5M+ families</strong> across India</span>
       </p>
     </div>
 
-    <!-- Right: robot + goals dock -->
+    <!-- Right: robot -->
     <div class="hero-scene relative z-10 flex flex-col items-center">
       <div class="hero-orbit hero-orbit--outer" aria-hidden="true"></div>
       <div class="hero-orbit hero-orbit--inner" aria-hidden="true"></div>
       <Robot hero />
-      <!-- Unified Goals Dock -->
-      <div class="hero-goals relative mt-2 flex w-full max-w-lg items-center divide-x divide-slate-100 rounded-2xl bg-white p-1.5 shadow-xl shadow-sama-navy/5 ring-1 ring-slate-100">
-        {goals.map((g) => (
-          <div class="flex flex-1 flex-col items-center justify-center gap-1 px-2 py-0.5 text-center">
-            <ArtIcon name={g.icon} class="h-5 w-5" />
-            <span class="text-[10px] sm:text-[11px] font-semibold leading-tight text-sama-navy">{g.label}</span>
-          </div>
-        ))}
-      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .sama-hero { background: linear-gradient(115deg, #fff 8%, #f7f9ff 48%, #eaf0fe 100%); }
+  .sama-hero { isolation: isolate; padding-bottom: calc(var(--services-overlap) + 24px); background: linear-gradient(115deg, #fff 8%, #f7f9ff 48%, #eaf0fe 100%); }
   .hero-ambient { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 80% 35%, #c9dbff80, transparent 48%), radial-gradient(ellipse at 5% 95%, #e3eafb, transparent 50%); }
   .hero-scene { isolation: isolate; padding: 0; }
   .hero-scene::before { content: ''; position: absolute; z-index: -1; width: 265px; height: 265px; top: 45px; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #f9fbff, #d7e5ff 68%, #c5d8fb); box-shadow: inset 0 0 60px #ffffffb0, 0 30px 80px #728fc220; }
   .hero-orbit { position: absolute; z-index: -1; border: 1px solid #b5c9ee70; border-radius: 50%; pointer-events: none; }
   .hero-orbit--outer { width: 330px; height: 330px; top: 12px; }
   .hero-orbit--inner { width: 300px; height: 300px; top: 27px; border-style: dashed; }
-  .hero-scene-label { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; color: #52658d; font-size: 10px; font-weight: 700; letter-spacing: .16em; }
-  .hero-scene-label span { width: 6px; height: 6px; border-radius: 50%; background: #457be0; }
-  .hero-goals { backdrop-filter: blur(16px); background: #ffffffdf; max-width: 390px; }
-  @media (min-width: 768px) and (max-width: 1023px) { .hero-layout { grid-template-columns: 1.15fr 1fr; } }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-layout { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; }
+    .hero-copy h1 { font-size: clamp(32px, 4.2vw, 40px); }
+    .hero-actions { gap: 8px; }
+    .hero-actions > a { padding-inline: 12px; }
+  }
   @media (max-width: 767px) {
+    .sama-hero { padding-bottom: calc(var(--services-overlap) + 16px); }
     .hero-layout { gap: 14px; padding-block: 16px; }
     .hero-scene::before { width: 125px; height: 125px; top: 0; }
     .hero-orbit--outer { width: 150px; height: 150px; top: -12px; }
     .hero-orbit--inner { width: 135px; height: 135px; top: -4px; }
-    .hero-goals { display: none; }
   }
   @media (max-width: 359px) {
     h1 { font-size: 28px; }

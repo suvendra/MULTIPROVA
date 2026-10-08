@@ -11,9 +11,11 @@ import AppDownload from '../components/AppDownload.astro';
 import PartnerCta from '../components/PartnerCta.astro';
 ---
 <BaseLayout>
-  <Hero />
-  <ServicesExplorer />
-  <Benefits />
+  <div class="home-intro">
+    <Hero />
+    <ServicesExplorer />
+    <Benefits />
+  </div>
   <HowItWorks />
   <AiCtaBanner />
   <Testimonials />
@@ -21,3 +23,13 @@ import PartnerCta from '../components/PartnerCta.astro';
   <PartnerCta />
   <Faq />
 </BaseLayout>
+
+<style>
+  .home-intro { --services-overlap: 64px; background: #fff; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .home-intro { --services-overlap: 48px; }
+  }
+  @media (max-width: 767px) {
+    .home-intro { --services-overlap: 32px; }
+  }
+</style>

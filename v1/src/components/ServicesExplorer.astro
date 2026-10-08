@@ -4,44 +4,63 @@ import ArtIcon from './ArtIcon.astro';
 import { everydayServices } from '../data/services';
 import { productHref } from '../data/products';
 ---
-<section class="services-section bg-white" id="services" aria-labelledby="services-heading">
+<section class="services-section" id="services" aria-labelledby="services-heading">
   <div class="container-x">
-    <div class="services-heading-row">
-      <div class="services-heading-copy text-center">
-        <p class="text-xs sm:text-sm font-bold tracking-widest text-brand-gold-ink uppercase">EVERYTHING YOU NEED IN ONE PLACE</p>
-        <h2 id="services-heading" class="mt-2 text-3xl font-extrabold tracking-tight text-sama-navy sm:text-4xl">Explore our services</h2>
-      </div>
-      <a href="/services/#everyday-services" class="services-all-link hidden items-center gap-2 rounded-full border border-sama-navy/25 px-5 py-2 text-xs font-semibold text-sama-navy transition hover:bg-slate-50 lg:inline-flex">View all services <Icon name="arrow-right" class="h-4 w-4" /></a>
-    </div>
-    <div class="service-grid mt-6">
-      {everydayServices.map(service => (
-        <a href={productHref(service.id)} class="service-card group rounded-2xl border border-slate-100 bg-white text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md">
-          <ArtIcon name={service.icon} class="h-12 w-12" />
-          <span class="service-name text-sm font-bold text-sama-navy">{service.name}</span>
+    <div class="services-panel">
+      <div class="services-heading-row">
+        <h2 id="services-heading">Explore our services</h2>
+        <a href="/services/#everyday-services" class="services-all-link">
+          View all services <Icon name="arrow-right" class="h-4 w-4" />
         </a>
-      ))}
+      </div>
+      <div class="service-grid">
+        {everydayServices.map(service => (
+          <a href={productHref(service.id)} class="service-choice">
+            <ArtIcon name={service.icon} class="h-12 w-12" />
+            <span class="service-name">{service.name}</span>
+          </a>
+        ))}
+      </div>
     </div>
-    <div class="mt-6 text-center lg:hidden"><a href="/services/#everyday-services" class="inline-flex items-center gap-2 text-sm font-semibold text-sama-navy">View all services <Icon name="arrow-right" class="h-4 w-4" /></a></div>
   </div>
 </section>
+
 <style>
-  .services-section { padding: 24px 0 56px; }
-  .service-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-  .service-card { grid-column: span 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 136px; padding: 16px 12px; }
-  .service-card:last-child { grid-column: 2 / span 2; }
-  .service-name { display: flex; align-items: center; justify-content: center; min-height: 36px; line-height: 18px; }
-  a:focus-visible { outline: 3px solid var(--color-brand-gold-ink); outline-offset: 4px; }
+  .services-section { position: relative; z-index: 1; margin-top: calc(-1 * var(--services-overlap)); scroll-margin-top: 16px; }
+  .services-panel { padding: 16px; border: 1px solid var(--color-sama-navy-100); border-radius: 20px; background: #fff; box-shadow: 0 12px 32px #0838880a; }
+  .services-heading-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  h2 { color: var(--color-sama-navy); font-size: 15px; font-weight: 600; line-height: 1.4; letter-spacing: -.025em; }
+  .services-all-link { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; color: var(--color-sama-navy); font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .services-all-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .service-grid { --service-column-gap: 4px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px var(--service-column-gap); margin-top: 12px; }
+  .service-choice { position: relative; grid-column: span 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px; min-width: 0; padding: 4px 6px; border-radius: 12px; color: var(--color-sama-navy); text-align: center; transition: background-color .2s; }
+  .service-choice::before { content: ''; display: none; position: absolute; top: 50%; left: calc(var(--service-column-gap) / -2 - .5px); width: 1px; height: 40px; transform: translateY(-50%); background: var(--color-sama-navy-100); pointer-events: none; }
+  .service-choice:last-child { grid-column: 3 / span 2; }
+  .service-choice:hover { background: var(--color-sama-navy-50); }
+  .service-name { display: flex; align-items: center; justify-content: center; min-height: 16px; font-size: 12px; font-weight: 500; line-height: 16px; }
+  a:focus-visible { outline: 3px solid var(--color-brand-gold-ink); outline-offset: 3px; }
+  @media (max-width: 359px) {
+    .service-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .service-choice:last-child { grid-column: 2 / span 2; }
+    .service-choice:nth-child(even)::before { display: block; }
+  }
+  @media (min-width: 360px) and (max-width: 639px) {
+    .service-choice:nth-child(3n + 2)::before, .service-choice:nth-child(3n)::before { display: block; }
+  }
   @media (min-width: 640px) and (max-width: 1023px) {
-    .service-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 16px; }
-    .service-card:nth-child(5) { grid-column: 2 / span 2; }
-    .service-card:last-child { grid-column: span 2; }
+    .services-panel { padding: 16px 24px; border-radius: 24px; }
+    h2 { font-size: 16px; }
+    .service-grid { --service-column-gap: 12px; grid-template-columns: repeat(8, minmax(0, 1fr)); }
+    .service-choice:nth-child(5) { grid-column: 2 / span 2; }
+    .service-choice:last-child { grid-column: span 2; }
+    .service-choice:not(:first-child):not(:nth-child(5))::before { display: block; }
   }
   @media (min-width: 1024px) {
-    .services-heading-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
-    .services-heading-copy { grid-column: 2; }
-    .services-all-link { grid-column: 3; justify-self: end; }
-    .service-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px; }
-    .service-card, .service-card:last-child { grid-column: auto; }
+    .services-panel { padding: 16px 28px; border-radius: 24px; }
+    h2 { font-size: 16px; }
+    .service-grid { --service-column-gap: 8px; grid-template-columns: repeat(7, minmax(0, 1fr)); margin-top: 8px; }
+    .service-choice, .service-choice:last-child { grid-column: auto; }
+    .service-choice:not(:first-child)::before { display: block; }
   }
-  @media (prefers-reduced-motion: reduce) { .service-card { transition: none; } .service-card:hover { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .service-choice { transition: none; } }
 </style>

@@ -2,7 +2,7 @@
 import { SITE } from '../config';
 import Icon from './Icon.astro';
 ---
-<section id="partners" class="partner-section bg-white" aria-labelledby="partner-heading">
+<section id="partners" class="partner-section bg-[#f8fafc]" aria-labelledby="partner-heading">
   <div class="container-x">
     <div class="partner-group">
       <div class="partner-intro">
@@ -27,7 +27,8 @@ import Icon from './Icon.astro';
   .partner-certificate { display: block; flex-shrink: 0; width: 112px; height: 112px; object-fit: contain; transform: translateY(10%); }
   @media (max-width: 767px) {
     .partner-group { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-    .partner-intro { gap: 20px; }
+    .partner-intro { flex-direction: column; justify-content: center; gap: 20px; }
+    .partner-copy { text-align: center; }
     .partner-certificate { width: 80px; height: 80px; }
   }
 </style>
